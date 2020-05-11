@@ -1,0 +1,41 @@
+
+spring:
+  # 环境 dev|test|prod
+  profiles:
+    #此处由maven的环境选择决定 '@profile.active@'
+    active: dev
+  #文件上传设置
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    #模板引擎
+  freemarker:
+    content-type: text/html
+    #关闭缓存
+    cache: true
+    request-context-attribute: request
+    #模板加载的位置
+    template-loader-path: classpath:/view/freemarker/
+    #前缀
+    suffix: .ftl
+
+
+
+# mybaits-plus配置
+pagehelper:
+  helperDialect:  mysql
+  reasonable: true
+  supportMethodsArguments:  true
+  params: count=countSql
+
+
+mybatis:
+  mapper-locations: classpath*:mybatis/**/mapper/*.xml
+  type-aliases-package: com.hz.admin.dao.entity
+logging:
+  config: classpath:logback-spring.xml

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 导入配置文件-很重要 -->
+    <properties resource="generator.properties"/>
+
+
+    <!-- defaultModelType="flat" 设置复合主键时不单独为主键创建实体 -->
+    <context id="hzimMySql" defaultModelType="flat">
+        <!-- 生成的POJO实现java.io.Serializable接口 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!--注释-->
+        <commentGenerator>
+            <!-- 将数据库中表的字段描述信息添加到注释 -->
+            <property name="addRemarkComments" value="true"/>
+            <!-- 注释里不添加日期 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接，直接通过${}读取application.properties里的配置 -->
+        <jdbcConnection
+                driverClass="${spring.datasource.driver-class-name}"
+                connectionURL="${spring.datasource.write.jdbc-url}"
+                userId="${spring.datasource.write.username}"
+                password="${spring.datasource.write.password}"/>
+
+
+        <!-- 生成POJO对象，并将类放到com.songguoliang.springboot.entity包下 -->
+        <javaModelGenerator targetPackage="com.hz.admin.db.entity"
+                            targetProject="src/main/java"></javaModelGenerator>
+        <!-- 生成mapper xml文件，并放到resources下的mapper文件夹下 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/mybatis/mapper/"></sqlMapGenerator>
+
+
+        <!-- 生成mapper xml对应dao接口，放到com.songguoliang.springboot.mapper包下-->
+        <javaClientGenerator targetPackage="com.hz.admin.db.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER"></javaClientGenerator>
+
+        <!-- table标签可以有多个，至少一个，tableName指定表名，可以使用_和%通配符 -->
+        <table tableName="hz_account" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+            <!-- 是否只生成POJO对象 -->
+            <property name="modelOnly" value="false"/>
+            <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
+            <domainObjectRenamingRule searchString="^Hz" replaceString="T"/>
+        </table>
+
+        <table tableName="hz_custno_info" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+            <!-- 是否只生成POJO对象 -->
+            <property name="modelOnly" value="false"/>
+            <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
+            <domainObjectRenamingRule searchString="^Hz" replaceString="T"/>
+        </table>
+
+        <table tableName="hz_custno_role" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+            <!-- 是否只生成POJO对象 -->
+            <property name="modelOnly" value="false"/>
+            <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
+            <domainObjectRenamingRule searchString="^Hz" replaceString="T"/>
+        </table>
+
+        <table tableName="hz_menu" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableInsert="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+            <!-- 是否只生成POJO对象 -->
+            <property name="modelOnly" value="false"/>
+            <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
+            <domainObjectRenamingRule searchString="^Hz" replaceString="T"/>
+        </table>
+
+        <table tableName="hz_role" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+            <!-- 是否只生成POJO对象 -->
+            <property name="modelOnly" value="false"/>
+            <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
+            <domainObjectRenamingRule searchString="^Hz" replaceString="T" />
+        </table>
+
+        <table tableName="hz_role_menu" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+            <!-- 是否只生成POJO对象 -->
+            <property name="modelOnly" value="false"/>
+            <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
+            <domainObjectRenamingRule searchString="^Hz" replaceString="T"/>
+        </table>
+
+
+
+    </context>
+
+
+</generatorConfiguration>
