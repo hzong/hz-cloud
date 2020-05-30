@@ -31,7 +31,7 @@ public class LoginOpenApiController extends BaseController {
 
 
     @PostMapping("/login/auth")
-    @ResponseBody
+
     public ServerResult login(@RequestBody  String json) {
         LoginDTO dto = parseJson(json,LoginDTO.class);
 
@@ -44,7 +44,7 @@ public class LoginOpenApiController extends BaseController {
 
 
     @PostMapping("/login/rememberMe")
-    @ResponseBody
+
     public ServerResult loginRememberMe(@RequestBody  String json) {
         LoginDTO dto = parseJson(json,LoginDTO.class);
 
@@ -79,7 +79,7 @@ public class LoginOpenApiController extends BaseController {
     }
 
     @PostMapping("/logout")
-    @ResponseBody
+
     public ServerResult logout(HttpServletResponse response) {
         Subject lvSubject = SecurityUtils.getSubject();
         if(lvSubject != null){

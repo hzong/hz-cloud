@@ -30,6 +30,10 @@ public interface UrlConstants {
      */
      static final String OPEN = "/open";
 
+    /**
+     * 限制+页面
+     */
+    static final String LIMIT_VIEW=LIMIT+VIEW;
 
 
 

@@ -6,7 +6,10 @@
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js${ver}"></script>
 <![endif]-->
 
-<script src="layui/layui.js${ver}"></script>
-<script src="js/biz/global.js${ver}"></script>
-<script src="js/biz/ajax-common.js${ver}"></script>
-<script src="js/jquery/jquery-2.1.3.min.js${ver}"></script>
+<script src="/layui/layui.js${ver}"></script>
+<#--<script src="layui/lay/modules/layer.js${ver}"></script>-->
+<script src="/js/global.js${ver}"></script>
+<script src="/js/ajax-common.js${ver}"></script>
+<script src="/js/jquery/jquery-2.1.3.min.js${ver}"></script>
+<script src="/js/api/server-api.js${ver}"></script>
+

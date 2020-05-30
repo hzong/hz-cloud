@@ -44,13 +44,3 @@ String.prototype.format = function() {
     return s;
 };
 
-
-//####################URL地址###################
-var OPEN_API = "/open";
-var LIMIT_API = "/limit";
-var LIMIT_URL = context_url+LIMIT_API;
-var LOGIN_AUTH_URL = context_url+"/login/auth";
-var LOGIN_URL = context_url+"/login";
-var MENU_URL = LIMIT_URL+"/menu/";
-var MENU_CHILDS_URL = MENU_URL+"/v1/getChilds";
-var MAIN_URL = context_url+"/main";

@@ -41,7 +41,7 @@ public class RoleLimitApiController extends BaseController {
     @ApiOperation(value = "添加", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/add")
-    @ResponseBody
+
     public ServerResult add(@RequestBody @Valid TRole role) {
         roleService.insert(role);
         return ServerResult.success();
@@ -54,7 +54,7 @@ public class RoleLimitApiController extends BaseController {
     @ApiOperation(value = "修改", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/update")
-    @ResponseBody
+
     public ServerResult update(@RequestBody @Valid TRole role) {
         roleService.insert(role);
         return ServerResult.success();
@@ -67,7 +67,7 @@ public class RoleLimitApiController extends BaseController {
     @ApiOperation(value = "删除", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/del")
-    @ResponseBody
+
     public ServerResult del(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long actId = MapUtils.getLong(map, "roleId");
@@ -82,7 +82,7 @@ public class RoleLimitApiController extends BaseController {
     @ApiOperation(value = "获取", notes = "获取")
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/get")
-    @ResponseBody
+
     public ServerResult get(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long roleId = MapUtils.getLong(map, "roleId");
@@ -96,7 +96,7 @@ public class RoleLimitApiController extends BaseController {
     @ApiOperation(value = "分页", notes = "分页")
     @ApiImplicitParam(name = "dto", value = "对象", required = true, dataType = "MenuRequestQueryPageDTO")
     @PostMapping(value = "v1/queryPage")
-    @ResponseBody
+
     public ServerResult queryPage(@RequestBody @Valid RoleRequestQueryPageDTO dto) {
         return ServerResult.success(roleService.selectPages(dto.getPageNum(),dto.getPageSize(),new TRoleExample()));
     }

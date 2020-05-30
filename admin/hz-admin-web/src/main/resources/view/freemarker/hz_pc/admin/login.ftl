@@ -37,19 +37,6 @@
 
 
 <#include "../common/commonInclude-js.ftl">
-<script src="js/biz/login.js${ver}"></script>
-<script type="text/javascript">
-    layui.use(['form','layer','jquery'], function () {
-
-        // 操作对象
-        var form = layui.form;
-        var $ = layui.jquery;
-        form.on('submit(login)',function (lay) {
-            login(lay.field);
-            return false;
-        })
-
-    });
-</script>
+<script src="/js/view/login.js${ver}" ></script>
 </body>
 </html>

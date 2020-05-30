@@ -5,7 +5,7 @@
             <li class="layui-nav-item layui-nav-itemed">
                 <a class="" href="javascript:;">所有商品</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" lay-aa="sdf">列表一</a></dd>
+                    <dd><a href="javascript:;" lay-href="asdf" lay-aa="sdf">列表一</a></dd>
                     <dd><a href="javascript:;">列表二</a></dd>
                     <dd><a href="javascript:;">列表三</a></dd>
                 </dl>

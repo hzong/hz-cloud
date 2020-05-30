@@ -45,7 +45,7 @@ public class MenuLimitApiController extends BaseController {
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/add")
 //    @RequiresPermissions("存放菜单编码")
-    @ResponseBody
+
     public ServerResult addMenu(@RequestBody @Valid TMenu menu) {
         menuService.insert(menu);
         return ServerResult.success();
@@ -60,7 +60,7 @@ public class MenuLimitApiController extends BaseController {
     @ApiOperation(value = "修改菜单", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/update")
-    @ResponseBody
+
     public ServerResult updateMenu(@RequestBody @Valid TMenu menu) {
         menuService.insert(menu);
         return ServerResult.success();
@@ -74,7 +74,7 @@ public class MenuLimitApiController extends BaseController {
     @ApiOperation(value = "修改菜单", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/del")
-    @ResponseBody
+
     public ServerResult delMenu(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long menuId = MapUtils.getLong(map, "menuId");
@@ -90,7 +90,6 @@ public class MenuLimitApiController extends BaseController {
     @ApiOperation(value = "获取菜单信息", notes = "获取")
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/get")
-    @ResponseBody
     public ServerResult get(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long menuId = MapUtils.getLong(map, "menuId");
@@ -105,8 +104,9 @@ public class MenuLimitApiController extends BaseController {
     @ApiOperation(value = "菜单分页", notes = "分页")
     @ApiImplicitParam(name = "dto", value = "菜单对象", required = true, dataType = "MenuRequestQueryPageDTO")
     @PostMapping(value = "v1/queryPage")
-    @ResponseBody
-    public ServerResult queryPage(@RequestBody @Valid MenuRequestQueryPageDTO dto) {
+    public ServerResult queryPage(@RequestBody @Valid String json
+    ) {
+        MenuRequestQueryPageDTO dto = parseJson(json, MenuRequestQueryPageDTO.class);
         return ServerResult.success(menuService.selectPages(dto.getPageNum(), dto.getPageSize(), new TMenuExample()));
     }
 

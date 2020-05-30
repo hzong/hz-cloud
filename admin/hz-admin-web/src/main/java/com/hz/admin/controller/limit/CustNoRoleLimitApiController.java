@@ -41,7 +41,7 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiOperation(value = "添加", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/add")
-    @ResponseBody
+
     public ServerResult add(@RequestBody @Valid TCustnoRole role) {
         custnoRoleService.insert(role);
         return ServerResult.success();
@@ -53,7 +53,7 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiOperation(value = "修改", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/update")
-    @ResponseBody
+
     public ServerResult update(@RequestBody @Valid TCustnoRole role) {
         custnoRoleService.insert(role);
         return ServerResult.success();
@@ -65,7 +65,7 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiOperation(value = "删除", notes = "将菜单信息传入")
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/del")
-    @ResponseBody
+
     public ServerResult del(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long crId = MapUtils.getLong(map, "crId");
@@ -79,7 +79,7 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiOperation(value = "获取", notes = "获取")
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/get")
-    @ResponseBody
+
     public ServerResult get(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long crId = MapUtils.getLong(map, "crId");
@@ -94,7 +94,7 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiOperation(value = "集合", notes = "分页")
     @ApiImplicitParam(name = "dto", value = "对象", required = true, dataType = "CustNoRoleQueryPageDTO")
     @PostMapping(value = "v1/queryPage")
-    @ResponseBody
+
     public ServerResult queryPage(@RequestBody @Valid CustNoRoleQueryPageDTO dto) {
         return ServerResult.success(custnoRoleService.selectPages(dto.getPageNum(),dto.getPageSize(),new TCustnoRoleExample()));
     }

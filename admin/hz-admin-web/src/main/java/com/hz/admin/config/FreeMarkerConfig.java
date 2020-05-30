@@ -38,8 +38,5 @@ public class FreeMarkerConfig {
         configuration.setSharedVariable("ver", versionScalar);
         configuration.setSharedVariable("envName", confBiz.getEnvName());
 
-
-
-
     }
 }

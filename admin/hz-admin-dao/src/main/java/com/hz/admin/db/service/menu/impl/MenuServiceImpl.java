@@ -38,8 +38,8 @@ public class MenuServiceImpl extends BaseService<TMenuExample, TMenu, Long> impl
     @Override
     public int insertSelective(TMenu record) {
         record.setCreateTime(DateUtils.getCurrentDate());
-        if(record.getMenuParent() == null){
-            record.setMenuParent(NumberCodeEnum.N00.getLval());
+        if(record.getMenuParentNo() == null){
+            record.setMenuParentNo(NumberCodeEnum.N00.getLval());
         }
         return super.insertSelective(record);
     }
@@ -82,14 +82,14 @@ public class MenuServiceImpl extends BaseService<TMenuExample, TMenu, Long> impl
         }
 
         TMenuExample example = new TMenuExample();
-        example.createCriteria().andMenuParentEqualTo(pid).andStatusEqualTo(NumberCodeEnum.N00.getIval());
+        example.createCriteria().andMenuParentNoEqualTo(pid).andStatusEqualTo(NumberCodeEnum.N00.getIval());
         return selectByExample(example);
     }
 
     @Override
     public List<TMenu> getRootMenus() {
         TMenuExample example = new TMenuExample();
-        example.createCriteria().andMenuParentEqualTo(NumberCodeEnum.N00.getLval());
+        example.createCriteria().andMenuParentNoEqualTo(NumberCodeEnum.N00.getLval());
         return selectByExample(example);
     }
 

@@ -70,7 +70,7 @@ public class ServerResult<T> extends CommonPojo {
     }
 
     public static <T> ServerResult<T> success(T data) {
-        return getInstance(ResultCode.SERVER_SUCCESS, null, data);
+        return getInstance(ResultCode.SERVER_SUCCESS, ResultCode.SERVER_SUCCESS.getDescribe(), data);
     }
 
     public static <T> ServerResult<T> error(String description) {

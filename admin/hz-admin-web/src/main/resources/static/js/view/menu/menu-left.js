@@ -1,8 +1,16 @@
 /**
  * 加载渲染一级菜单
  */
-function loadMenu() {
-    reqLeftMenu(function (data) {
+function loadLeftMenu() {
+
+
+
+    reqLeftMenuApi(function (res) {
+        if (!success(res)){
+            return;
+        }
+        var data = res.data;
+
         var dom = $("[lay-filter=left-menus]");
 
         var menuEles = [];
@@ -25,7 +33,7 @@ function loadMenu() {
             //第一个加载子菜单
             if (i == 0) {
                 ele.addClass("layui-nav-itemed");
-                viewChildMenu(data[i].menuId, ele);
+                renderChildMenuFun(data[i].menuId, ele);
             }
             dom.append(ele);
         });
@@ -33,19 +41,24 @@ function loadMenu() {
 
     });
 
-}
 
+
+}
 
 /**
  * 渲染子菜单
  * @param menuId
  * @param curMenu
  */
-function viewChildMenu(menuId, curMenu) {
+function renderChildMenuFun(menuId, curMenu) {
     //将历史子菜单清空
     curMenu.parent().find(".layui-nav-child").remove();
     //子菜单
-    reqChildMenu(menuId, function (data) {
+    reqChildMenuApi(menuId, function (res) {
+        if (!success(res)){
+            return;
+        }
+        var data = res.data;
         if(data.length == 0){
             return;
         }
@@ -64,50 +77,8 @@ function viewChildMenu(menuId, curMenu) {
         })
 
         curMenu.append(nav_child_dom);
-    })
-}
-
-
-/**
- * 记载一级菜单
- * @param call
- */
-function reqLeftMenu(call) {
-    sysajax({
-        url:MENU_CHILDS_URL,
-        data:{pid:0},
-        dataType:'json',
-        type:'post',
-        success:function (result) {
-            if (success(result)){
-                // call([{level: 1, menuId: 1, url: "www.baidu.com", menuName: "菜单1"}]);
-                call(result.data);
-            }
-        }
     });
-
 }
 
-/**
- *加载二级菜单
- * @param menuId
- * @param call
- */
-function reqChildMenu(menuId, call) {
-    //todo 这里血加载子菜单ajax
-
-    sysajax({
-        url:MENU_CHILDS_URL,
-        data:{pid:menuId},
-        dataType:'json',
-        type:'post',
-        success:function (result) {
-            if (success(result)){
-                // call([{level: 1, menuId: 1, url: "www.baidu.com", menuName: "菜单1子菜单1"},{level: 1, menuId: 2, url: "www.baidu.com", menuName: "菜单1子菜单1"}]);
-                call(result.data);
-            }
-        }
-    });
 
 
-}

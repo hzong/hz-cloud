@@ -395,63 +395,63 @@ public class TMenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentIsNull() {
-            addCriterion("menu_parent is null");
+        public Criteria andMenuParentNoIsNull() {
+            addCriterion("menu_parent_no is null");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentIsNotNull() {
-            addCriterion("menu_parent is not null");
+        public Criteria andMenuParentNoIsNotNull() {
+            addCriterion("menu_parent_no is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentEqualTo(Long value) {
-            addCriterion("menu_parent =", value, "menuParent");
+        public Criteria andMenuParentNoEqualTo(Long value) {
+            addCriterion("menu_parent_no =", value, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentNotEqualTo(Long value) {
-            addCriterion("menu_parent <>", value, "menuParent");
+        public Criteria andMenuParentNoNotEqualTo(Long value) {
+            addCriterion("menu_parent_no <>", value, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentGreaterThan(Long value) {
-            addCriterion("menu_parent >", value, "menuParent");
+        public Criteria andMenuParentNoGreaterThan(Long value) {
+            addCriterion("menu_parent_no >", value, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentGreaterThanOrEqualTo(Long value) {
-            addCriterion("menu_parent >=", value, "menuParent");
+        public Criteria andMenuParentNoGreaterThanOrEqualTo(Long value) {
+            addCriterion("menu_parent_no >=", value, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentLessThan(Long value) {
-            addCriterion("menu_parent <", value, "menuParent");
+        public Criteria andMenuParentNoLessThan(Long value) {
+            addCriterion("menu_parent_no <", value, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentLessThanOrEqualTo(Long value) {
-            addCriterion("menu_parent <=", value, "menuParent");
+        public Criteria andMenuParentNoLessThanOrEqualTo(Long value) {
+            addCriterion("menu_parent_no <=", value, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentIn(List<Long> values) {
-            addCriterion("menu_parent in", values, "menuParent");
+        public Criteria andMenuParentNoIn(List<Long> values) {
+            addCriterion("menu_parent_no in", values, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentNotIn(List<Long> values) {
-            addCriterion("menu_parent not in", values, "menuParent");
+        public Criteria andMenuParentNoNotIn(List<Long> values) {
+            addCriterion("menu_parent_no not in", values, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentBetween(Long value1, Long value2) {
-            addCriterion("menu_parent between", value1, value2, "menuParent");
+        public Criteria andMenuParentNoBetween(Long value1, Long value2) {
+            addCriterion("menu_parent_no between", value1, value2, "menuParentNo");
             return (Criteria) this;
         }
 
-        public Criteria andMenuParentNotBetween(Long value1, Long value2) {
-            addCriterion("menu_parent not between", value1, value2, "menuParent");
+        public Criteria andMenuParentNoNotBetween(Long value1, Long value2) {
+            addCriterion("menu_parent_no not between", value1, value2, "menuParentNo");
             return (Criteria) this;
         }
 

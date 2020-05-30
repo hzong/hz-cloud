@@ -11,7 +11,15 @@
     <context id="hzimMySql" defaultModelType="flat">
         <!-- 生成的POJO实现java.io.Serializable接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
-
+        <!--<plugin type="com.hz.hzsf.mybatis.generator.plugins.MybatisGeneratorPlugin"/>-->
+        <!-- 批量插入插件 -->
+        <plugin type="com.hz.hzsf.mybatis.generator.plugins.BatchInsertPlugin">
+            <!--
+            开启后可以实现官方插件根据属性是否为空决定是否插入该字段功能
+            ！需开启allowMultiQueries=true多条sql提交操作，所以不建议使用！插件默认不开启
+            -->
+            <property name="allowMultiQueries" value="false"/>
+        </plugin>
         <!--注释-->
         <commentGenerator>
             <!-- 将数据库中表的字段描述信息添加到注释 -->

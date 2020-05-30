@@ -4,11 +4,11 @@
  */
 function sysajax(params) {
     if (ENV_NAME_DEV == envName) {
-        $.ajax(params);
+        ajax(params);
     } else {
         //验证是否登录
         authStatus(function () {
-            $.ajax(params);
+            ajax(params);
         }, function () {
             window.location.href = login_view_url;
         });
@@ -36,6 +36,8 @@ function ajax(params) {
             console.log("请求状态：" + textStatus);
             console.log(errorThrown);
             console.log("请求失败");
+            layer.msg('请求服务器错误！');
+
         }
     }
     $.ajax(params);
