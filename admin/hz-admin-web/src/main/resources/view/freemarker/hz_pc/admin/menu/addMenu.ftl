@@ -16,12 +16,12 @@
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
-                    <div class="layui-card">
+                    <div class="layui-card" >
                         <div class="layui-card-header">添加菜单</div>
                         <div class="layui-card-body">
                             <div class="layui-form layui-form-pane" lay-filter="layuiadmin-app-form-list"
                                  id="layuiadmin-app-form-list"
-                                 style="padding: 20px 30px 0 0;">
+                                 style="padding: 20px;">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">菜单编码</label>
                                     <div class="layui-input-inline">

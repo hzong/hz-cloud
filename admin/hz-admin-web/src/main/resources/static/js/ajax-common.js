@@ -10,7 +10,7 @@ function sysajax(params) {
         authStatus(function () {
             ajax(params);
         }, function () {
-            window.location.href = login_view_url;
+            window.location.href = LOGIN_URL;
         });
     }
     ;
@@ -36,7 +36,6 @@ function ajax(params) {
             console.log("请求状态：" + textStatus);
             console.log(errorThrown);
             console.log("请求失败");
-            layer.msg('请求服务器错误！');
 
         }
     }

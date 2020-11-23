@@ -1,6 +1,6 @@
 package com.hz.admin.model.pojo.dto.custnoinfo;
 
-import com.hz.hzsf.common.pojo.RequestPage;
+import com.dzzh.hz.hzsf.common.pojo.RequestPage;
 
 /**
  * @Classname CustNoInfoQueryPageDTO

@@ -1,7 +1,7 @@
 package com.hz.admin.service.login;
 
-import com.hz.admin.model.pojo.dto.login.LoginDTO;
-import com.hz.hzsf.common.pojo.result.ServerResult;
+import com.hz.admin.model.request.login.LoginRequest;
+import com.dzzh.hz.hzsf.common.pojo.dto.common.ResponseDTO;
 
 /**
  * @Classname LoginService
@@ -13,9 +13,8 @@ public interface LoginService {
 
     /**
      * 登录
-     * @param dto
      * @return
      */
-     ServerResult login(LoginDTO dto);
+     ResponseDTO loginAuth(LoginRequest request);
 
 }

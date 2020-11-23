@@ -1,6 +1,9 @@
 package com.hz.admin.config;
 
-import com.hz.admin.biz.ConfBiz;
+import cn.org.rapid_framework.freemarker.directive.BlockDirective;
+import cn.org.rapid_framework.freemarker.directive.ExtendsDirective;
+import cn.org.rapid_framework.freemarker.directive.OverrideDirective;
+import com.hz.admin.biz.conf.ConfBiz;
 import com.hz.admin.web.freemarker.ContextUrlScalar;
 import com.hz.admin.web.freemarker.VersionScalar;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,9 @@ public class FreeMarkerConfig {
         configuration.setSharedVariable("context_url", contextUrlScalar);
         configuration.setSharedVariable("ver", versionScalar);
         configuration.setSharedVariable("envName", confBiz.getEnvName());
+        configuration.setSharedVariable("block", new BlockDirective());
+        configuration.setSharedVariable("override", new OverrideDirective());
+        configuration.setSharedVariable("extends", new ExtendsDirective());
 
     }
 }

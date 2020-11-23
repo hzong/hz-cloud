@@ -3,6 +3,12 @@
  */
 function loadLeftMenu() {
 
+    layui.use('element', function(){
+        var element = layui.element;
+        //渲染
+        element.render('nav', 'left-menus');
+    });
+
 
 
     reqLeftMenuApi(function (res) {
@@ -33,13 +39,12 @@ function loadLeftMenu() {
             //第一个加载子菜单
             if (i == 0) {
                 ele.addClass("layui-nav-itemed");
-                renderChildMenuFun(data[i].menuId, ele);
+                renderChildMenuFun(data[i].menuNo, ele);
             }
             dom.append(ele);
         });
-
-
     });
+
 
 
 
@@ -71,12 +76,36 @@ function renderChildMenuFun(menuId, curMenu) {
             }
 
             var menu_tag = '<li class="layui-nav-item {4}">' +
-                '<a href="javascript:;" data-level="{0}" data-menuId="{1}" data-url="{2}">{3}</a></li>';
-            var html = menu_tag.format(ele.level, ele.menuId, ele.url, ele.menuName,sel);
-            nav_child_dom.append(html);
+                '<a href="javascript:;" data-level="{0}" data-menuId="{1}" >{3}</a></li>';
+            var html = menu_tag.format(ele.level, ele.menuNo, ele.url, ele.menuName,sel);
+            var item_dom = $(html);
+            item_dom.on("click",function(){
+                layui.use('element', function(){
+                    var element = layui.element;
+                    var html_fromat ='<iframe src="{0}" style="width:100%;height:100%; border: 0px solid"></iframe>';
+                    var iframe_dom =html_fromat.format(ele.url);
+                    addTab({
+                        title: ele.menuName
+                        ,content: iframe_dom //支持传入html
+                        ,id: ele.menuNo
+                    });
+                    selTab(ele.menuNo,html);
+
+                });
+
+
+            });
+            nav_child_dom.append(item_dom);
+
+
+
+
         })
 
         curMenu.append(nav_child_dom);
+
+
+
     });
 }
 

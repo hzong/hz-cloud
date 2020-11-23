@@ -1,18 +1,17 @@
 package com.hz.admin.controller.limit;
 
-import com.hz.admin.controller.base.BaseController;
+import com.dzzh.hz.hzsf.common.pojo.dto.common.ResponseDTO;
 import com.hz.admin.db.entity.TAccount;
 import com.hz.admin.db.entity.TAccountExample;
-import com.hz.admin.db.service.account.AccountService;
+import com.hz.admin.db.repository.account.AccountRepository;
+import com.hz.admin.controller.base.BaseController;
 import com.hz.admin.model.pojo.dto.account.AccountRequestQueryPageDTO;
 
 import com.hz.admin.web.common.constants.UrlConstants;
-import com.hz.hzsf.common.pojo.result.ServerResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +33,7 @@ import java.util.Map;
 public class AccountLimitApiController extends BaseController {
 
     @Autowired
-    private AccountService accountService;
+    private AccountRepository accountService;
 
     /**
      * 添加
@@ -46,9 +45,9 @@ public class AccountLimitApiController extends BaseController {
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/add")
 
-    public ServerResult addMenu(@RequestBody @Valid TAccount menu) {
+    public ResponseDTO addMenu(@RequestBody @Valid TAccount menu) {
         accountService.insert(menu);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -61,9 +60,9 @@ public class AccountLimitApiController extends BaseController {
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/update")
 
-    public ServerResult updateMenu(@RequestBody @Valid TAccount menu) {
+    public ResponseDTO updateMenu(@RequestBody @Valid TAccount menu) {
         accountService.updateByPrimaryKey(menu);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -75,11 +74,11 @@ public class AccountLimitApiController extends BaseController {
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/del")
 
-    public ServerResult delMenu(@RequestBody @NotBlank(message = "{required}") String json) {
+    public ResponseDTO delMenu(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         String actId = MapUtils.getString(map, "actId");
         accountService.deleteByPrimaryKey(actId);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -91,10 +90,10 @@ public class AccountLimitApiController extends BaseController {
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/get")
 
-    public ServerResult get(@RequestBody @NotBlank(message = "{required}") String json) {
+    public ResponseDTO get(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         String actId = MapUtils.getString(map, "actId");
-        return ServerResult.success(accountService.selectByPrimaryKey(actId));
+        return ResponseDTO.ok(accountService.selectByPrimaryKey(actId));
     }
 
     /**
@@ -106,8 +105,8 @@ public class AccountLimitApiController extends BaseController {
     @ApiImplicitParam(name = "dto", value = "菜单对象", required = true, dataType = "MenuRequestQueryPageDTO")
     @PostMapping(value = "v1/queryPage")
 
-    public ServerResult queryPage(@RequestBody @Valid AccountRequestQueryPageDTO dto) {
-        return ServerResult.success(accountService.selectPages(dto.getPageNum(),dto.getPageSize(),new TAccountExample()));
+    public ResponseDTO queryPage(@RequestBody @Valid AccountRequestQueryPageDTO dto) {
+        return ResponseDTO.ok(accountService.selectPages(dto.getPageNum(),dto.getPageSize(),new TAccountExample()));
     }
 
 

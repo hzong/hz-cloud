@@ -1,18 +1,11 @@
 package com.hz.admin.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hz.hzsf.common.utils.DateUtils;
+import com.dzzh.hz.hzsf.common.utils.DateUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @Classname WebConfig

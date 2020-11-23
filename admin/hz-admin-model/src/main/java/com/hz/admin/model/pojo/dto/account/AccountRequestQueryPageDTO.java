@@ -1,6 +1,6 @@
 package com.hz.admin.model.pojo.dto.account;
 
-import com.hz.hzsf.common.pojo.RequestPage;
+import com.dzzh.hz.hzsf.common.pojo.RequestPage;
 
 /**
  * @Classname AccountRequestQueryPageDTO
@@ -9,4 +9,5 @@ import com.hz.hzsf.common.pojo.RequestPage;
  * @Created by hzong
  */
 public class AccountRequestQueryPageDTO extends RequestPage {
+
 }

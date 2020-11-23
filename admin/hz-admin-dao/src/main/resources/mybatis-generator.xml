@@ -11,15 +11,15 @@
     <context id="hzimMySql" defaultModelType="flat">
         <!-- 生成的POJO实现java.io.Serializable接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
-        <!--<plugin type="com.hz.hzsf.mybatis.generator.plugins.MybatisGeneratorPlugin"/>-->
+        <!--<plugin type="MybatisGeneratorPlugin"/>-->
         <!-- 批量插入插件 -->
-        <plugin type="com.hz.hzsf.mybatis.generator.plugins.BatchInsertPlugin">
-            <!--
+       <!-- <plugin type="BatchInsertPlugin">
+            &lt;!&ndash;
             开启后可以实现官方插件根据属性是否为空决定是否插入该字段功能
             ！需开启allowMultiQueries=true多条sql提交操作，所以不建议使用！插件默认不开启
-            -->
+            &ndash;&gt;
             <property name="allowMultiQueries" value="false"/>
-        </plugin>
+        </plugin>-->
         <!--注释-->
         <commentGenerator>
             <!-- 将数据库中表的字段描述信息添加到注释 -->
@@ -76,11 +76,11 @@
 
         <table tableName="hz_menu" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableInsert="true"
-               enableSelectByExample="true" selectByExampleQueryId="true">
+               enableSelectByExample="true" selectByExampleQueryId="true" selectByPrimaryKeyQueryId="true">
             <!-- 是否只生成POJO对象 -->
             <property name="modelOnly" value="false"/>
             <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
-            <domainObjectRenamingRule searchString="^Hz" replaceString="T"/>
+            <domainObjectRenamingRule  searchString="^Hz" replaceString="T"/>
         </table>
 
         <table tableName="hz_role" enableCountByExample="true" enableUpdateByExample="true"

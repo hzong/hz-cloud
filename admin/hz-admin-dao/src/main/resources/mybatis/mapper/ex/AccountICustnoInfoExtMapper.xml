@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.admin.db.mapper.ex.AccountCustnoInfoExtMapper">
+    <resultMap type="com.hz.admin.db.entity.ex.AccountCustnoInfoDO" id="resultActCustnoInfo">
+		<id column="account" jdbcType="VARCHAR" property="account" />
+		<result column="custno" jdbcType="BIGINT" property="custno" />
+		<result column="nick" jdbcType="VARCHAR" property="nick" />
+	</resultMap>
+
+
+    <select id="selectAccountByCustnoInfo" resultMap="resultActCustnoInfo" >
+				SELECT account,act.custno,nick
+		FROM
+			hz_account act,
+			hz_custno_info ci
+		WHERE
+			 ci.custno = act.custno
+		AND act.account =  #{account}
+
+    </select>
+
+
+</mapper>

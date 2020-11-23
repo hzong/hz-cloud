@@ -1,14 +1,15 @@
 package com.hz.admin.controller.open;
 
-import com.hz.admin.controller.base.BaseController;
-import com.hz.admin.model.pojo.dto.login.LoginDTO;
+import com.dzzh.hz.hzsf.common.pojo.dto.common.ResponseDTO;
+import com.hz.admin.pojo.bo.login.LoginBO;
 import com.hz.admin.service.login.LoginService;
-import com.hz.admin.web.common.constants.UrlConstants;
-import com.hz.hzsf.common.encrypt.Md5Encrypt;
-import com.hz.hzsf.common.pojo.result.ServerResult;
+import com.hz.admin.controller.base.BaseController;
+import com.hz.admin.model.request.login.LoginRequest;
+import com.dzzh.hz.hzsf.common.encrypt.Md5Encrypt;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 免登陆请求控制器，用于访问首页之类的请求
- * 
+ *
  * @author ShengHao
  *
  */
@@ -31,28 +32,22 @@ public class LoginOpenApiController extends BaseController {
 
 
     @PostMapping("/login/auth")
-
-    public ServerResult login(@RequestBody  String json) {
-        LoginDTO dto = parseJson(json,LoginDTO.class);
-
-        // 密码MD5加密
-        String sign = Md5Encrypt.encodeByMD5(dto.getAccount()+dto.getPwd());
-        UsernamePasswordToken token = new UsernamePasswordToken(dto.getAccount(), sign);
-        // 获取Subject对象
-        return loginHandle(dto,token);
+    public ResponseDTO login(@RequestBody  String json) {
+        LoginRequest dto = parseJson(json, LoginRequest.class);
+        return loginService.loginAuth(dto);
     }
 
 
+
+
     @PostMapping("/login/rememberMe")
-
-    public ServerResult loginRememberMe(@RequestBody  String json) {
-        LoginDTO dto = parseJson(json,LoginDTO.class);
-
+    public ResponseDTO loginRememberMe(@RequestBody  String json) {
+        LoginRequest dto = parseJson(json, LoginRequest.class);
 
         // 密码MD5加密
         String sign = Md5Encrypt.encodeByMD5(dto.getAccount()+dto.getPwd());
         UsernamePasswordToken token = new UsernamePasswordToken(dto.getAccount(), sign,dto.getRememberMe());
-        return loginHandle(dto,token);
+        return loginAuth(dto,token);
     }
 
     /**
@@ -61,31 +56,34 @@ public class LoginOpenApiController extends BaseController {
      * @param token
      * @return
      */
-    private ServerResult loginHandle(LoginDTO dto, UsernamePasswordToken token) {
+    private ResponseDTO loginAuth(LoginRequest dto, UsernamePasswordToken token) {
         // 获取Subject对象
         Subject subject = SecurityUtils.getSubject();
+        LoginBO loginBo = new LoginBO();
         try {
             subject.login(token);
-            return ServerResult.success();
+            BeanUtils.copyProperties(dto,loginBo);
         } catch (UnknownAccountException e) {
-            return ServerResult.error(e.getMessage());
+            return ResponseDTO.fail(e.getMessage());
         } catch (IncorrectCredentialsException e) {
-            return ServerResult.error(e.getMessage());
+            return ResponseDTO.fail(e.getMessage());
         } catch (LockedAccountException e) {
-            return ServerResult.error(e.getMessage());
+            return ResponseDTO.fail(e.getMessage());
         } catch (AuthenticationException e) {
-            return ServerResult.error("认证失败！");
+            return ResponseDTO.fail("认证失败！");
         }
+//        return loginService.login(loginBo);
+        return null;
     }
 
     @PostMapping("/logout")
 
-    public ServerResult logout(HttpServletResponse response) {
+    public ResponseDTO logout(HttpServletResponse response) {
         Subject lvSubject = SecurityUtils.getSubject();
         if(lvSubject != null){
             lvSubject.logout();
         }
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
 }

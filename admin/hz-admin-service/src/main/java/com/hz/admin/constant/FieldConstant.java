@@ -7,4 +7,12 @@ package com.hz.admin.constant;
  * @Created by hzong
  */
 public interface FieldConstant {
+    /**
+     * 令牌
+     */
+    String TOKEN = "token";
+    /**
+     * 信息
+     */
+    String INFO = "info";
 }

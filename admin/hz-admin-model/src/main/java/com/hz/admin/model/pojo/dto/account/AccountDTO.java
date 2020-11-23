@@ -1,6 +1,6 @@
 package com.hz.admin.model.pojo.dto.account;
 
-import com.hz.hzsf.common.pojo.CommonPojo;
+import com.dzzh.hz.hzsf.common.pojo.CommonPojo;
 
 /**
  * @Classname AccountDTO

@@ -1,6 +1,5 @@
 package com.hz.admin.controller.base;
 
-import com.alibaba.fastjson.JSON;
 import com.hz.admin.web.controller.CommonController;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

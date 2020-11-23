@@ -8,7 +8,7 @@ $(function() {
 
 function loadMenu() {
 
-    layui.use(['form', 'table'], function () {
+    layui.use(['form', 'table','element'], function () {
         var table = layui.table;
         var form = layui.form;
 

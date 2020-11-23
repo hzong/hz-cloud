@@ -177,5 +177,6 @@
         <module>admin/hz-admin-common</module>
         <module>admin/hz-admin-model</module>
         <module>hzsf-web-common</module>
+        <module>mybatis-generator-plugin</module>
     </modules>
 </project>

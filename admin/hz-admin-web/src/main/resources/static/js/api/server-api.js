@@ -1,8 +1,9 @@
 
 //####################URL地址-begin####################
 var OPEN_API = "/open";
-var LIMIT_API = "/limit";
-var LIMIT_URL = context_url+LIMIT_API;
+var LIMIT = "/limit";
+var LIMIT_VIEW = LIMIT+"/view";
+var LIMIT_URL = context_url+LIMIT;
 var LOGIN_AUTH_URL = context_url+"/login/auth";
 var LOGIN_URL = context_url+"/login";
 var MAIN_URL = context_url+"/main";
@@ -10,6 +11,9 @@ var MAIN_URL = context_url+"/main";
 var MENU_URL = LIMIT_URL+"/menu";
 var MENU_CHILDS_URL = MENU_URL+"/v1/getChilds";
 var MENU_QUERY_PAGE = MENU_URL+'/v1/queryPage';
+var MENU_TO_MENU_MAIN_URL = LIMIT_VIEW+'/toMenuMain';
+
+
 //####################菜单地址-end####################
 //####################URL地址-end####################
 
@@ -44,7 +48,6 @@ function reqLeftMenuApi(call) {
         dataType:'json',
         type:'post',
         success:function (result) {
-
             call(result);
         }
     });

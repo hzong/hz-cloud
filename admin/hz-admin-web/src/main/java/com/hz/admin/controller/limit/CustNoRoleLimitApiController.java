@@ -1,12 +1,12 @@
 package com.hz.admin.controller.limit;
 
-import com.hz.admin.controller.base.BaseController;
+import com.dzzh.hz.hzsf.common.pojo.dto.common.ResponseDTO;
 import com.hz.admin.db.entity.TCustnoRole;
 import com.hz.admin.db.entity.TCustnoRoleExample;
-import com.hz.admin.db.service.custnorole.CustnoRoleService;
-import com.hz.admin.model.pojo.dto.custrole.CustNoRoleQueryPageDTO;
+import com.hz.admin.controller.base.BaseController;
+import com.hz.admin.db.repository.custnorole.CustnoRoleRepository;
+import com.hz.admin.model.pojo.dto.custrole.CustNoRoleQueryPageRequest;
 import com.hz.admin.web.common.constants.UrlConstants;
-import com.hz.hzsf.common.pojo.result.ServerResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +33,7 @@ import java.util.Map;
 public class CustNoRoleLimitApiController extends BaseController {
 
     @Autowired
-    CustnoRoleService custnoRoleService;
+    CustnoRoleRepository custnoRoleService;
 
     /**
      * 添加
@@ -42,9 +42,9 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/add")
 
-    public ServerResult add(@RequestBody @Valid TCustnoRole role) {
+    public ResponseDTO add(@RequestBody @Valid TCustnoRole role) {
         custnoRoleService.insert(role);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -54,9 +54,9 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/update")
 
-    public ServerResult update(@RequestBody @Valid TCustnoRole role) {
+    public ResponseDTO update(@RequestBody @Valid TCustnoRole role) {
         custnoRoleService.insert(role);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -66,11 +66,11 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/del")
 
-    public ServerResult del(@RequestBody @NotBlank(message = "{required}") String json) {
+    public ResponseDTO del(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long crId = MapUtils.getLong(map, "crId");
         custnoRoleService.deleteByPrimaryKey(crId);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -80,10 +80,10 @@ public class CustNoRoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/get")
 
-    public ServerResult get(@RequestBody @NotBlank(message = "{required}") String json) {
+    public ResponseDTO get(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long crId = MapUtils.getLong(map, "crId");
-        return ServerResult.success(custnoRoleService.selectByPrimaryKey(crId));
+        return ResponseDTO.ok(custnoRoleService.selectByPrimaryKey(crId));
     }
 
 
@@ -92,11 +92,11 @@ public class CustNoRoleLimitApiController extends BaseController {
      * 集合-分页
      */
     @ApiOperation(value = "集合", notes = "分页")
-    @ApiImplicitParam(name = "dto", value = "对象", required = true, dataType = "CustNoRoleQueryPageDTO")
+    @ApiImplicitParam(name = "dto", value = "对象", required = true, dataType = "CustNoRoleQueryPageRequest")
     @PostMapping(value = "v1/queryPage")
 
-    public ServerResult queryPage(@RequestBody @Valid CustNoRoleQueryPageDTO dto) {
-        return ServerResult.success(custnoRoleService.selectPages(dto.getPageNum(),dto.getPageSize(),new TCustnoRoleExample()));
+    public ResponseDTO queryPage(@RequestBody @Valid CustNoRoleQueryPageRequest dto) {
+        return ResponseDTO.ok(custnoRoleService.selectPages(dto.getPageNum(),dto.getPageSize(),new TCustnoRoleExample()));
     }
 
 

@@ -1,6 +1,6 @@
 package com.hz.admin.web.exception;
 
-import com.hz.hzsf.common.handler.BaseExceptionHandler;
+import com.dzzh.hz.hzsf.web.handler.BaseExceptionHandler;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,10 +1,16 @@
 package com.hz.admin.service.login.impl;
 
-import com.hz.admin.model.pojo.dto.login.LoginDTO;
+import com.dzzh.hz.hzsf.common.pojo.dto.common.ResponseDTO;
+import com.hz.admin.constant.FieldConstant;
+import com.hz.admin.model.request.login.LoginRequest;
 import com.hz.admin.service.login.LoginService;
-import com.hz.hzsf.common.pojo.result.ServerResult;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Classname LoginServiceImpl
@@ -19,10 +25,30 @@ public class LoginServiceImpl implements LoginService {
 
 
     @Override
-    public ServerResult login(LoginDTO dto){
-        // TODO: 2020-04-30 设置登录
-        return null;
+    public ResponseDTO loginAuth(LoginRequest loginRequest){
 
+        Subject subject = SecurityUtils.getSubject();
+
+        UsernamePasswordToken token = new UsernamePasswordToken(loginRequest.getAccount(), loginRequest.getAccount()+loginRequest.getPwd());
+        try {
+            subject.login(token);
+        } catch (UnknownAccountException e) {
+            return ResponseDTO.fail(e.getMessage());
+        } catch (IncorrectCredentialsException e) {
+            return ResponseDTO.fail(e.getMessage());
+        } catch (LockedAccountException e) {
+            return ResponseDTO.fail(e.getMessage());
+        } catch (AuthenticationException e) {
+            return ResponseDTO.fail("认证失败！");
+        }
+
+        Map<String,Object> result = new HashMap<>(2);
+        result.put(FieldConstant.TOKEN,subject.getSession().getId());
+        result.put(FieldConstant.INFO,subject.getPrincipal());
+        return ResponseDTO.ok(result);
     }
+
+
+
 
 }

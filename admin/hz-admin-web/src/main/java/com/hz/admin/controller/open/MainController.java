@@ -1,7 +1,6 @@
 package com.hz.admin.controller.open;
 
 import com.hz.admin.controller.base.BaseController;
-import com.hz.admin.web.common.constants.UrlConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

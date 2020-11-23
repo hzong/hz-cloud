@@ -35,7 +35,7 @@ pagehelper:
 
 
 mybatis:
-  mapper-locations: classpath*:mybatis/**/mapper/*.xml
+  mapper-locations: classpath*:mybatis/**/mapper/*.xml,classpath*:mybatis/**/mapper/ex/*.xml
   type-aliases-package: com.hz.admin.dao.entity
 logging:
   config: classpath:logback-spring.xml

@@ -1,9 +1,11 @@
 package com.hz.admin.config;
 
-import com.hz.admin.web.common.constants.UrlConstants;
+import com.hz.admin.web.filter.TokenAuthenticationFilter;
 import com.hz.admin.web.shiro.ShiroRealm;
+import com.hz.admin.web.shiro.ShiroWebSessionManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 
 /**
@@ -50,6 +53,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/", "anon");
         // 除上以外所有url都必须认证通过才可以访问，未通过认证自动访问LoginUrl
         filterChainDefinitionMap.put("/limit/**", "authc");
+        // 所有请求都要经过 jwt过滤器
+        filterChainDefinitionMap.put("/**", "jwt");
 
 
 //        filterChainDefinitionMap.put("/css/**", "anon");
@@ -62,6 +67,10 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/**", "authc");
 
 
+        // 在 Shiro过滤器链上加入 JWTFilter
+        LinkedHashMap<String, Filter> filters = new LinkedHashMap<>();
+        filters.put("jwt", new TokenAuthenticationFilter());
+        shiroFilterFactoryBean.setFilters(filters);
 
 
         /**
@@ -74,16 +83,23 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+
+    @Bean
+    public SessionManager sessionManager() {
+        return new ShiroWebSessionManager();
+    }
+
     @Bean
     public SecurityManager securityManager(){
         // 配置SecurityManager，并注入shiroRealm
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm());
-        securityManager.setRememberMeManager(rememberMeManager());
+//        securityManager.setRememberMeManager(rememberMeManager());
+        securityManager.setSessionManager(sessionManager());
         /**
          * 缓存存储方式
          */
-        securityManager.setCacheManager(getEhCacheManager());
+//        securityManager.setCacheManager(getEhCacheManager());
         return securityManager;
     }
 

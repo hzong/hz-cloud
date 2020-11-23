@@ -1,12 +1,12 @@
 package com.hz.admin.controller.limit;
 
-import com.hz.admin.controller.base.BaseController;
+import com.dzzh.hz.hzsf.common.pojo.dto.common.ResponseDTO;
 import com.hz.admin.db.entity.TRole;
 import com.hz.admin.db.entity.TRoleExample;
-import com.hz.admin.db.service.role.RoleService;
+import com.hz.admin.db.repository.role.RoleRepository;
+import com.hz.admin.controller.base.BaseController;
 import com.hz.admin.model.pojo.dto.role.RoleRequestQueryPageDTO;
 import com.hz.admin.web.common.constants.UrlConstants;
-import com.hz.hzsf.common.pojo.result.ServerResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +32,7 @@ import java.util.Map;
 public class RoleLimitApiController extends BaseController {
 
     @Autowired
-    private RoleService roleService;
+    private RoleRepository roleService;
 
     /**
      * 添加
@@ -42,9 +42,9 @@ public class RoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/add")
 
-    public ServerResult add(@RequestBody @Valid TRole role) {
+    public ResponseDTO add(@RequestBody @Valid TRole role) {
         roleService.insert(role);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -55,9 +55,9 @@ public class RoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "menu", value = "菜单对象", required = true, dataType = "TMenu")
     @PostMapping(value = "v1/update")
 
-    public ServerResult update(@RequestBody @Valid TRole role) {
+    public ResponseDTO update(@RequestBody @Valid TRole role) {
         roleService.insert(role);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -68,11 +68,11 @@ public class RoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/del")
 
-    public ServerResult del(@RequestBody @NotBlank(message = "{required}") String json) {
+    public ResponseDTO del(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long actId = MapUtils.getLong(map, "roleId");
         roleService.deleteByPrimaryKey(actId);
-        return ServerResult.success();
+        return ResponseDTO.ok();
     }
 
     /**
@@ -83,10 +83,10 @@ public class RoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "json", value = "菜单对象", required = true, dataType = "String")
     @PostMapping(value = "v1/get")
 
-    public ServerResult get(@RequestBody @NotBlank(message = "{required}") String json) {
+    public ResponseDTO get(@RequestBody @NotBlank(message = "{required}") String json) {
         Map map = parseJson(json, Map.class);
         Long roleId = MapUtils.getLong(map, "roleId");
-        return ServerResult.success(roleService.selectByPrimaryKey(roleId));
+        return ResponseDTO.ok(roleService.selectByPrimaryKey(roleId));
     }
 
     /**
@@ -97,8 +97,8 @@ public class RoleLimitApiController extends BaseController {
     @ApiImplicitParam(name = "dto", value = "对象", required = true, dataType = "MenuRequestQueryPageDTO")
     @PostMapping(value = "v1/queryPage")
 
-    public ServerResult queryPage(@RequestBody @Valid RoleRequestQueryPageDTO dto) {
-        return ServerResult.success(roleService.selectPages(dto.getPageNum(),dto.getPageSize(),new TRoleExample()));
+    public ResponseDTO queryPage(@RequestBody @Valid RoleRequestQueryPageDTO dto) {
+        return ResponseDTO.ok(roleService.selectPages(dto.getPageNum(),dto.getPageSize(),new TRoleExample()));
     }
 
 
